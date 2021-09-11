@@ -75,8 +75,9 @@ public class Principal {
     }
     
     public static void listadoalumnos(){
+
+	System.out.println("NOMBRE\t\t\tAPELLIDO\t\t\t\tID");
         for (Persona persona : lista) {
-            System.out.println("NOMBRE\t\t\tAPELLIDO\t\t\t\tID");
             System.out.print(persona.getNombre()+"\t\t\t");
             System.out.print(persona.getApellido()+"\t\t\t\t\t");
             System.out.println(persona.getId()+"\n");
@@ -93,8 +94,9 @@ public class Principal {
           eleccion();  
 }
     public static void fin (){
+
+	System.out.println("NOMBRE\t\t\tAPELLIDO\t\t\t\tID");
         for (Persona persona : lista) {
-            System.out.println("NOMBRE\t\t\tAPELLIDO\t\t\t\tID");
             System.out.print(persona.getNombre()+"\t\t\t");
             System.out.print(persona.getApellido()+"\t\t\t\t\t");
             System.out.println(persona.getId()+"\n");
