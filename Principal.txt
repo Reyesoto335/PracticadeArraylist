@@ -1,34 +1,48 @@
+
 package ListadeAlumnos;
 
 import Paquete_Datos_Lista_Alumnos.Persona;
 import java.util.ArrayList;
-//import java.util.Collection;
-//import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
 public class Principal {
     
-    public static Persona alumnos = new Persona();
-    public static List<Persona> lista = new ArrayList();
+    static Persona alumnos = new Persona();
+    static List<Persona> lista = new ArrayList();
     static byte seleccion;
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
         eleccion();
-        
     }
     
     public static void eleccion (){
-        System.out.println("\t\t\tSeleccione que quiere hacer \n\nIngresar nuevo alumno (1)\tDar listado de alumnos (2)\t"
-                + "Salir y mostrar los alumnos agregados (3)");
+        System.out.println("\t\t\tSeleccione que quiere hacer \n\nIngresar nuevo alumno (1)\t\t\tDar listado de alumnos (2)\n\n"
+                + "Remover un alumno (3)" + "\t\t\tSalir y mostrar los alumnos agregados (4)");
         seleccion = sc.nextByte();
         switch (seleccion){
             case 1: ingresar();
                 break;
             case 2: listadoalumnos();
                 break;
-            case 3: fin();
+             case 3: retirar();
+                break;
+             case 4: fin();
+                break;
+            default:
+                break;
+        }
+    }
+    
+    public static void eleccion2(){
+        System.out.println("\t\t\t\tSELECCIONE QUE QUIERE HACER\n\n"
+                + "\t\tINGRESAR UN NUEVO ID PARA ELIMINAR (1) \t\tREGRESAR AL MENÚ PRINCIPAL (2)");
+        seleccion = sc.nextByte();
+        switch (seleccion){
+            case 1: retirar();
+                break;
+            case 2: eleccion();
                 break;
             default:
                 break;
@@ -36,7 +50,7 @@ public class Principal {
     }
     
     public static void ingresar(){
-        
+        Persona alumnos = new Persona();
         System.out.println("Ingrese el nombre del alumno: ");
         alumnos.setNombre(sc.next());
         System.out.println("Ingrese el apellido del alumno: ");
@@ -45,47 +59,57 @@ public class Principal {
         alumnos.setDirección(sc.next());
         System.out.println("Ingrese el ID del alumno: ");
         alumnos.setId(sc.nextInt());
-        
-        existente();
-        if(existente()){
+        if(existente(alumnos)){
             System.out.println("El registro ya existe\n"
                     + "Intente agregar otro\n");
         }
         else{
             lista.add(alumnos);
         }
-        
         eleccion();
-        
     }
     
-    public static boolean existente(){
+    public static boolean existente(Persona alumnos){
         Iterator<Persona> iterador = lista.iterator();
         while(iterador.hasNext()){
             if(alumnos.getId() == iterador.next().getId()){
+                System.out.println("----------Dato existente-----------");
                 return true;
             }
         }
         return false;
     }
     
+    public static void retirar(){
+        int remover;
+        Iterator<Persona> iterador = lista.iterator();
+        fin();
+        System.out.println("\t\tSE DEBE DE INGRESAR EL ID DEL ALUMNO PARA ELIMINARLO\n\n"
+                + "INGRESE EL ID DEL ALUMNO: ");
+        remover = sc.nextInt();
+            while(iterador.hasNext()){
+                if(remover == iterador.next().getId()){
+                iterador.remove();
+                }
+            }
+        fin();
+        eleccion2();
+    }
+    
     public static void listadoalumnos(){
         System.out.println("NOMBRE\t\t\tAPELLIDO\t\t\t\tID\t\t\tDIRECCION");
-        for (Persona persona : lista) {
-            System.out.print(persona.getNombre()+"\t\t\t");
-            System.out.print(persona.getApellido()+"\t\t\t\t\t");
-            System.out.print(persona.getId()+"\t\t\t\t");
-            System.out.println(persona.getDirección()+"\n");
-            
+        Iterator<Persona> iterador = lista.iterator();
+        while(iterador.hasNext()){
+            iterador.next().mostrarDatos();  
         }
         eleccion();  
-}
+    }
+    
     public static void fin (){
-        System.out.println("NOMBRE\t\t\tAPELLIDO\t\t\t\tID");
-        for (Persona persona : lista) {
-            System.out.print(persona.getNombre()+"\t\t\t");
-            System.out.print(persona.getApellido()+"\t\t\t\t\t");
-            System.out.println(persona.getId()+"\n");
+        System.out.println("NOMBRE\t\t\tAPELLIDO\t\t\t\tID\t\t\tDIRECCION");
+        Iterator<Persona> iterador = lista.iterator();
+        while(iterador.hasNext()){
+            iterador.next().mostrarDatos();  
         }
     }
 }

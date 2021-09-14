@@ -1,3 +1,4 @@
+
 package Paquete_Datos_Lista_Alumnos;
 
 public class Persona {
@@ -14,9 +15,13 @@ public class Persona {
     }
     
     public Persona (){
-        
     }
-
+    
+    public void mostrarDatos(){
+        
+        System.out.println(this.nombre +"\t\t\t"+ this.apellido + "\t\t\t\t\t" + this.dirección + "\t\t\t\t" + this.id + "\n\n");
+    }
+    
     public String getNombre() {
         return nombre;
     }
@@ -48,4 +53,5 @@ public class Persona {
     public void setId(int id) {
         this.id = id;
     }
+    
 }
