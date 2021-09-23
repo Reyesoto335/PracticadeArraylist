@@ -11,6 +11,8 @@ public class Principal {
     
     static Persona alumnos = new Persona();
     static List<Persona> lista = new ArrayList();
+    static List<Persona> cursos = new ArrayList();
+    static List<Persona> notas = new ArrayList();
     static byte seleccion;
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
@@ -18,8 +20,9 @@ public class Principal {
     }
     
     public static void eleccion (){
-        System.out.println("\t\t\tSeleccione que quiere hacer \n\nIngresar nuevo alumno (1)\t\t\tDar listado de alumnos (2)\n\n"
-                + "Remover un alumno (3)" + "\t\t\tSalir y mostrar los alumnos agregados (4)");
+        System.out.println("\n\t\t\tSeleccione que quiere hacer \n\nIngresar nuevo alumno (1)\t\t\tDar listado de alumnos (2)\n\n"
+                + "Remover un alumno (3)" + "\t\t\tSalir y mostrar los alumnos agregados (4)"
+                + "\n\nAGREGAR CURSOS (5)");
         seleccion = sc.nextByte();
         switch (seleccion){
             case 1: ingresar();
@@ -30,6 +33,12 @@ public class Principal {
                 break;
              case 4: fin();
                 break;
+             case 5:
+                 Iterator<Persona> iterador = lista.iterator();
+                 while(iterador.hasNext()){
+                     agregarcursos();
+                 }
+                 break;
             default:
                 break;
         }
@@ -49,6 +58,20 @@ public class Principal {
         }
     }
     
+    public static void eleccion3(){
+        System.out.println("\t\t\t\tSELECCIONE QUE QUIERE HACER\n\n"
+                + "\t\tINGRESAR UN NUEVO CURSO (1) \t\tREGRESAR AL MENÚ PRINCIPAL (2)");
+        seleccion = sc.nextByte();
+        switch(seleccion){
+            case 1: agregarcursos();
+                break;
+            case 2: eleccion();
+                break;
+            default:
+                break;
+        }
+    }
+    
     public static void ingresar(){
         Persona alumnos = new Persona();
         System.out.println("Ingrese el nombre del alumno: ");
@@ -59,6 +82,7 @@ public class Principal {
         alumnos.setDirección(sc.next());
         System.out.println("Ingrese el ID del alumno: ");
         alumnos.setId(sc.nextInt());
+        
         if(existente(alumnos)){
             System.out.println("El registro ya existe\n"
                     + "Intente agregar otro\n");
@@ -67,6 +91,27 @@ public class Principal {
             lista.add(alumnos);
         }
         eleccion();
+    }
+    
+    public static void agregarcursos(){
+        int encontrar;
+        Persona materias = new Persona();
+        Iterator<Persona> iterador = lista.iterator();
+        System.out.println("PARA AGREGAR UN CURSO DEBE DE INGRESAR EL ID DEL ALUMNO CORRESPONDIENTE\n"
+                + "\t\tINGRESE EL ID DEL ALUMNO: ");
+        encontrar = sc.nextInt();
+        while(iterador.hasNext()){
+                if(encontrar == iterador.next().getId()){
+                System.out.println("\t\tINGRESE EL CURSO\n");
+                materias.setCursos(sc.next());
+                cursos.add(materias);
+                }
+                else{
+                    System.out.println("\t\t\tEl ID INGRESADO NO EXISTE\n\n");
+                }
+            }
+        
+        eleccion3();
     }
     
     public static boolean existente(Persona alumnos){
@@ -91,17 +136,35 @@ public class Principal {
                 if(remover == iterador.next().getId()){
                 iterador.remove();
                 }
+                else{
+                    System.out.println("\t\t\tEl ID INGRESADO NO EXISTE\n\n");
+                }
             }
         fin();
         eleccion2();
     }
     
     public static void listadoalumnos(){
-        System.out.println("NOMBRE\t\t\tAPELLIDO\t\t\t\tID\t\t\tDIRECCION");
+        System.out.println("NOMBRE\t\t\tAPELLIDO\t\t\t\tID\t\t\tDIRECCION\n");
+        Iterator<Persona> iteradorcurso = cursos.iterator();
         Iterator<Persona> iterador = lista.iterator();
         while(iterador.hasNext()){
-            iterador.next().mostrarDatos();  
+            iterador.next().mostrarDatos();
+            while(iteradorcurso.hasNext()){
+            iteradorcurso.next().motrarcursos();
+            }
         }
+        
+        
+        /*while(iteradorcurso.hasNext()){
+            iteradorcurso.next().motrarcursos();  
+        }*/
+        
+        Iterator<Persona> iteradornota = notas.iterator();
+        while(iteradornota.hasNext()){
+            iteradornota.next().motrarnotas();  
+        }
+        
         eleccion();  
     }
     

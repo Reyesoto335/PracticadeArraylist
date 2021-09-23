@@ -1,25 +1,35 @@
-
 package Paquete_Datos_Lista_Alumnos;
 
 public class Persona {
     protected String nombre;
     protected String apellido;
     protected String dirección;
+    protected String cursos;
     protected int id;
+    protected int calificaciones;
     
-    public Persona(String nombre, String apellido, String direccion, int id){
+    public Persona(String nombre, String apellido, String direccion, int id, int clasificaciones, String cursos){
         this.nombre = nombre;
         this.apellido = apellido;
         this.dirección = direccion;
         this.id = id;
+        this.calificaciones = clasificaciones;
+        this.cursos = cursos;
     }
     
     public Persona (){
     }
     
     public void mostrarDatos(){
-        
-        System.out.println(this.nombre +"\t\t\t"+ this.apellido + "\t\t\t\t\t" + this.dirección + "\t\t\t\t" + this.id + "\n\n");
+        System.out.println(this.nombre +"\t\t\t"+ this.apellido + "\t\t\t\t\t" + this.id + "\t\t\t\t" + this.dirección + "\t\t\t");
+    }
+    
+    public void motrarnotas (){
+        System.out.println(this.calificaciones + "\n");
+    }
+    
+    public void motrarcursos (){
+        System.out.print(this.cursos + "\n");
     }
     
     public String getNombre() {
@@ -53,5 +63,23 @@ public class Persona {
     public void setId(int id) {
         this.id = id;
     }
+
+    public int getCalificaciones() {
+        return calificaciones;
+    }
+
+    public void setCalificaciones(int calificaciones) {
+        this.calificaciones = calificaciones;
+    }
+
+    public String getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(String cursos) {
+        this.cursos = cursos;
+    }
+    
+    
     
 }
