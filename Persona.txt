@@ -1,35 +1,54 @@
-package Paquete_Datos_Lista_Alumnos;
+package practica_de_clases_arraylist.newpackage;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class Persona {
-    protected String nombre;
-    protected String apellido;
-    protected String dirección;
-    protected String cursos;
-    protected int id;
-    protected int calificaciones;
+    public String nombre;
+    public String apellido;
+    public String dirección;
+    public int id;
+    Cursos lista_Cursos = new Cursos();
+    public List<Cursos> lista = new ArrayList();
     
-    public Persona(String nombre, String apellido, String direccion, int id, int clasificaciones, String cursos){
+    
+    public Persona(String nombre, String apellido, String direccion, int id){
         this.nombre = nombre;
         this.apellido = apellido;
         this.dirección = direccion;
         this.id = id;
-        this.calificaciones = clasificaciones;
-        this.cursos = cursos;
+        this.lista = null;
+    }
+
+    public Cursos getLista_Cursos() {
+        return lista_Cursos;
+    }
+
+    public void setLista_Cursos(Cursos lista_Cursos) {
+        this.lista_Cursos = lista_Cursos;
+    }
+
+    public List<Cursos> getLista() {
+        return lista;
+    }
+
+    public void setLista(List<Cursos> lista) {
+        this.lista = lista;
     }
     
     public Persona (){
     }
     
     public void mostrarDatos(){
-        System.out.println(this.nombre +"\t\t\t"+ this.apellido + "\t\t\t\t\t" + this.id + "\t\t\t\t" + this.dirección + "\t\t\t");
-    }
-    
-    public void motrarnotas (){
-        System.out.println(this.calificaciones + "\n");
-    }
-    
-    public void motrarcursos (){
-        System.out.print(this.cursos + "\n");
+        System.out.println(this.nombre +"\t\t\t"+ this.apellido + "\t\t\t" + this.id + "\t\t\t" + this.dirección + "\n\n");
+        System.out.println("\t---------MOSTRANDO LOS CURSOS Y NOTAS DEL ALUMNO--------------");
+        
+        System.out.println("NOMBRE\t\t\t\tNOTAS\t\t\tESTADO");
+        Iterator<Cursos> iterador = lista.iterator();
+        while (iterador.hasNext()) {
+            iterador.next().mostrarNotas();
+        }
     }
     
     public String getNombre() {
@@ -63,23 +82,4 @@ public class Persona {
     public void setId(int id) {
         this.id = id;
     }
-
-    public int getCalificaciones() {
-        return calificaciones;
-    }
-
-    public void setCalificaciones(int calificaciones) {
-        this.calificaciones = calificaciones;
-    }
-
-    public String getCursos() {
-        return cursos;
-    }
-
-    public void setCursos(String cursos) {
-        this.cursos = cursos;
-    }
-    
-    
-    
 }
