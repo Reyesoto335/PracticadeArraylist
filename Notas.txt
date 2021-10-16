@@ -1,0 +1,45 @@
+package practica_de_clases_arraylist.newpackage;
+
+public class Notas {
+    int nota;
+    int promedio;
+    String estado;
+
+    public Notas(int nota, int promedio, String estado) {
+        this.nota = nota;
+        this.promedio = promedio;
+        this.estado = estado;
+    }
+    
+    public Notas(){
+        
+    }
+
+    public int getNota() {
+        return nota;
+    }
+
+    public void setNota(int nota) {
+        this.nota = nota;
+    }
+
+    public int getPromedio() {
+        return promedio;
+    }
+
+    public void setPromedio(int promedio) {
+        this.promedio = promedio;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
+    public void mostrarnotas(){
+        System.out.println(this.promedio + "\t\t\t" + this.estado + "\n\n");
+    }
+}

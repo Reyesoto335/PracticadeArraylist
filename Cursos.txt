@@ -1,22 +1,15 @@
 package practica_de_clases_arraylist.newpackage;
 
 public class Cursos {
-    public String nombre; 
-    public int nota;
-    public String estado;
+    public String nombre;
+    public int id;
 
-    public Cursos() {
-        this.nombre = "";
-        this.nota = 0;
-        this.estado = "";
+    public Cursos(String nombre, int nota, String estado, int id) {
+        this.nombre = nombre;
+        this.id = id;
     }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
+    
+    public Cursos(){ 
     }
 
     public String getNombre() {
@@ -27,16 +20,15 @@ public class Cursos {
         this.nombre = nombre;
     }
 
-    public int getNota() {
-        return nota;
+    public int getId() {
+        return id;
     }
 
-    public void setNota(int nota) {
-        this.nota = nota;
+    public void setId(int id) {
+        this.id = id;
     }
-    
-    public void mostrarNotas(){
-        System.out.println(this.nombre +"\t\t\t\t"+ this.nota + "\t\t\t" + this.estado + "\n\n");
+    public void mostrarCursos(){
+        System.out.println(this.nombre +"\t\t\t\t"+ this.id + "\n\n");
         
     }
 }

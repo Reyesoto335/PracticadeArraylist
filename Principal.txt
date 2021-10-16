@@ -1,41 +1,52 @@
-
 package practica_de_clases_arraylist;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import practica_de_clases_arraylist.newpackage.AlumnoCurso;
 import practica_de_clases_arraylist.newpackage.Cursos;
+import practica_de_clases_arraylist.newpackage.Notas;
 import practica_de_clases_arraylist.newpackage.Persona;
 
 public class Practica_De_Clases_Arraylist {
-
+    
+    public static List<AlumnoCurso> asociasion = new ArrayList();
+    public static List<Notas> listaNotas = new ArrayList();
+    public static List<Cursos> lista_Cursos = new ArrayList();
     public static Persona alumnos = new Persona();
     public static List<Persona> lista = new ArrayList();
     public static byte seleccion;
     public static Scanner sc = new Scanner(System.in);
     
     public static void main(String[] args) {
-                eleccion();
+        eleccion();
     }
 
     public static void eleccion() {
         while (true) {
             System.out.println("\t\t\tSeleccione que quiere hacer \n\nIngresar nuevo alumno (1)\t\t\tDar listado de alumnos (2)\n\n"
-                    + "Remover un alumno (3)" + "\t\t\tSalir y mostrar los alumnos agregados (4)");
+                    + "Remover un alumno (3)" + "\t\t\tSALIR (4)"
+                    + "\n\nINGRESAR CURSOS (5) \t\t INGRESAR NOTAS (6)"
+                    + "\n\nASOCIAR ALUMNOS Y CURSOS (7)");
             seleccion = sc.nextByte();
             switch (seleccion) {
                 case 1:
-                    ingresar();
+                    ingresarAlumno();
                     break;
                 case 2:
                     listadoalumnos();
                     break;
                 case 3:
-                    retirar();
+                    retirarAlumno();
                     break;
-                case 4:
+                case 4: 
                     fin();
+                    break;
+                case 5:
+                    agregarcursos();
+                case 6:
+                    asociaralumnosycursos();
                     break;
                 default:
                     break;
@@ -49,7 +60,7 @@ public class Practica_De_Clases_Arraylist {
         seleccion = sc.nextByte();
         switch (seleccion) {
             case 1:
-                retirar();
+                retirarAlumno();
                 break;
             case 2:
                 eleccion();
@@ -58,8 +69,33 @@ public class Practica_De_Clases_Arraylist {
                 break;
         }
     }
+    
+    public static void asociaralumnosycursos(){
+        int buscar;
+        Iterator<Persona> iterador = lista.iterator();
+        Iterator<Cursos> iterador2 = lista_Cursos.iterator();
+        
+        System.out.println("\t\tSE DEBE DE INGRESAR EL ID DEL ALUMNO\n"
+                + "\tINGRESE EL ID: ");
+        buscar = sc.nextInt();
+        
+        while (iterador.hasNext()) {
+            if (buscar == iterador.next().getId()) {
+                
+            }
+            else {
+                System.out.println("********ALUMNO NO ENCONTRADO******");
+            }
+        }
+        System.out.println("\t\tSE DEBE DE INGRESAR EL ID DEL CURSO\n"
+                + "\tINGRESE EL ID: ");
+        buscar = sc.nextInt();
+        while (iterador2.hasNext()){
+            
+        }
+    }
 
-    public static void ingresar() {
+    public static void ingresarAlumno() {
         Persona alumnos = new Persona();
         Scanner sc2 = new Scanner(System.in);
         System.out.println("Ingrese el nombre del alumno: ");
@@ -74,42 +110,6 @@ public class Practica_De_Clases_Arraylist {
         System.out.println("Ingrese el ID del alumno: ");
         alumnos.setId(sc2.nextInt());
         
-        
-        // ingreso de lista de alumnos 
-          List<Cursos> lista_Cursos = new ArrayList();
-          System.out.println("Ingrese la cantidad de cursos a ingresar: ");
-          int Ccursos=0;
-          Ccursos= sc.nextInt();
-          
-          for (int i = 0; i < Ccursos; i++) {
-              
-              Cursos Curso = new Cursos();
-              Scanner sc1 = new Scanner(System.in);
-              System.out.println("Ingrese Nombre del curso: ");
-              Curso.setNombre(sc1.nextLine());
-              System.out.println("Ingrese las notas del curso: ");
-              int notas = 0;
-              int v1, v2, v3;
-              v1 = sc.nextInt();
-              v2 = sc.nextInt();
-              v3 = sc.nextInt();
-              notas = v1 + v2+ v3;
-              int promedio = 0;
-              promedio = notas/3;
-              Curso.setNota(promedio);
-              if (Curso.getNota() >= 70) {
-                  Curso.setEstado("Aprobado");
-              }else{
-                  Curso.setEstado("Reprobado");
-              }  
-              
-              lista_Cursos.add(Curso);
-        }
-          
-          //lista de cursos del alumno que esta en proceso.
-          alumnos.lista = (List<Cursos>) lista_Cursos;
-          
-          
         if (existente(alumnos)) {
             System.out.println("ESTE ID YA EXISTE EN OTRO ALUMNO\n"
                     + "INTETE AGREGAR OTRO\n");
@@ -119,6 +119,41 @@ public class Practica_De_Clases_Arraylist {
         }
         eleccion();
         
+    }
+    
+    public static void agregarcursos (){
+        Cursos Curso = new Cursos();
+        Scanner sc1 = new Scanner(System.in);
+        System.out.println("INGRESE EL NOMBRE DEL CURSO: ");
+        Curso.setNombre(sc1.nextLine());
+        System.out.println("INGRESE EL ID DEL CURSO: ");
+        Curso.setId(sc1.nextInt());
+              
+        lista_Cursos.add(Curso);
+        eleccion();
+    }
+    
+    public static void IngresoNotas (){
+        Notas nota = new Notas();
+        System.out.println("INGRESE LAS NOTAS DEL CURSO: ");
+        int notas = 0;
+        int v1, v2, v3;
+        v1 = sc.nextInt();
+        v2 = sc.nextInt();
+        v3 = sc.nextInt();
+        notas = v1 + v2+ v3;
+        int promedio = 0;
+        promedio = notas/3;
+        nota.setNota(promedio);
+             
+        if (nota.getNota() >= 70) {
+            nota.setEstado("Aprobado");
+            }
+        else{
+            nota.setEstado("Reprobado");
+            }
+        listaNotas.add(nota);
+        eleccion();
     }
 
     public static boolean existente(Persona alumnos) {
@@ -132,13 +167,14 @@ public class Practica_De_Clases_Arraylist {
         return false;
     }
 
-    public static void retirar() {
+    public static void retirarAlumno() {
         int remover;
         Iterator<Persona> iterador = lista.iterator();
         
         System.out.println("\t\tSE DEBE DE INGRESAR EL ID DEL ALUMNO PARA ELIMINARLO\n\n"
                 + "INGRESE EL ID DEL ALUMNO: ");
         remover = sc.nextInt();
+        
         while (iterador.hasNext()) {
             if (remover == iterador.next().getId()) {
                 iterador.remove();
@@ -150,22 +186,40 @@ public class Practica_De_Clases_Arraylist {
 
     public static void listadoalumnos() {
         Iterator<Persona> iterador = lista.iterator();
-        while (iterador.hasNext()) {
         System.out.println("-----------------------------MOSTRANDO AL ALUMNO---------------------------");
-        System.out.println("NOMBRE\t\t\tAPELLIDO\t\t\t\tID\t\t\tDIRECCION");
+        System.out.println("NOMBRE\t\t\tAPELLIDO\t\t\tID\t\t\tDIRECCION");
+        while (iterador.hasNext()) {
             iterador.next().mostrarDatos();
         }
+        System.out.println("\n\n");
+        mostrarCursos();
         eleccion();
     }
-
-    public static void fin() {
-        Iterator<Persona> iterador = lista.iterator();
-        while (iterador.hasNext()) {
-        System.out.println("-----------------------------MOSTRANDO AL ALUMNO---------------------------");
-        System.out.println("NOMBRE\t\t\tAPELLIDO\t\t\t\tID\t\t\tDIRECCION");
-            iterador.next().mostrarDatos();
-        }
+    
+    public static void mostrarCursos(){
+        System.out.println("\t---------MOSTRANDO LOS CURSOS--------------\n");
         
+        System.out.println("NOMBRE\t\t\t\tID");
+        Iterator<Cursos> iterador2 = lista_Cursos.iterator();
+        while (iterador2.hasNext()) {
+            iterador2.next().mostrarCursos();
+            }
+    }
+    
+    public static void mostrarNotas(){
+        System.out.println("\t---------MOSTRANDO LOS CURSOS Y NOTAS DEL ALUMNO--------------\n");
+        System.out.println("NOMBRE\t\t\t\tNOTAS\t\t\tESTADO");
+        Iterator<Notas> iterador = listaNotas.iterator();
+        while (iterador.hasNext()) {
+            iterador.next().mostrarnotas();
+            }
+    }
+    
+    public static void mostraralumnosycursos(){
+
+    }
+    
+    public static void fin() {
         System.exit(0);
     }
-    }
+}
